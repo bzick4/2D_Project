@@ -5,28 +5,32 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    [SerializeField] private float _speed, _jumpForce;
+    [SerializeField] private float _speed,_runSpeed, _jumpForce;
     [SerializeField] private SpriteRenderer _heroSprite;
 
     private Rigidbody2D _samurai;
-    private HeroAnimation _heroAnimation;
+    private Animator _heroAnimation;
 
     private Vector3 input;
-    private bool isMove, isJump, isFall;
+    private bool isMove;
 
-    public bool isGround { get; private set; }
+    private int _speedWalk = 2;
+
+    public bool isGrounded;
     
     private void Start()
     {
         _samurai = GetComponent<Rigidbody2D>();
-        _heroAnimation = GetComponent<HeroAnimation>();
+        _heroAnimation = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        Jump();
+        Attack();
+        Block();
+        //Jump();
         MoveHero();
-        //Fall();
+        Sitdown();
     }
     
     private void MoveHero()
@@ -38,34 +42,91 @@ public class Hero : MonoBehaviour
         if (isMove)
         {
             _heroSprite.flipX = input.x < 0;
+            _heroAnimation.SetBool("isWalk", true);
+            Debug.Log("walk");   
         }
-        _heroAnimation.isRun = isMove;
+        else
+        {
+            _heroAnimation.SetBool("isWalk", false);
+        }
+        
+        if (isMove && Input.GetKey(KeyCode.RightShift))
+        {
+            _speed = _runSpeed;
+            _heroAnimation.SetBool("isRun", true);
+            Debug.Log("run");
+        }
+        else if(isMove && Input.GetKeyUp(KeyCode.RightShift))
+        {
+            _speed = _speedWalk;
+            _heroAnimation.SetBool("isRun", false);
+            _heroAnimation.SetBool("isWalk", true);
+        }
     }
 
-    private void Jump()
+    // private void Jump()
+    // {
+    //     if (Input.GetKey(KeyCode.UpArrow) && Mathf.Abs(_samurai.velocity.y) <0.05f)
+    //     { 
+    //         _samurai.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse); 
+    //         _heroAnimation.SetBool("isJump", true); 
+    //         Debug.Log("jump");
+    //     }
+    //     if (Input.GetKeyUp(KeyCode.UpArrow))
+    //     {
+    //         _heroAnimation.SetBool("isJump" ,false);
+    //         _heroAnimation.SetBool("isFall",true);
+    //         Debug.Log("fall");
+    //     }
+    // }
+
+    // private void Fall() 
+    //     { 
+    //         if (_samurai.velocity.y < 0)
+    //         { 
+    //             _heroAnimation.SetBool("isJump" ,false);
+    //             _heroAnimation.SetBool("isFall",true);
+    //             Debug.Log("fall");
+    //         } 
+    //     }
+
+    private void Sitdown()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(_samurai.velocity.y)<0.05f)
+        if (Input.GetKey(KeyCode.DownArrow) && Mathf.Abs(_samurai.velocity.y) < 0.05f)
         {
-            _samurai.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            _heroAnimation.speed(_samurai.velocity.y);
+            _heroAnimation.SetBool("isSitdown", true);
+            Debug.Log("sitdown");
+        }
+        else
+        {
+            _heroAnimation.SetBool("isSitdown", false);
+        }
+    }
+
+    private void Attack()
+    {
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            _heroAnimation.SetBool("isAttack",true);
+            Debug.Log("Attack");
+        }
+        else
+        {
+            _heroAnimation.SetBool("isAttack",false);
         }
         
     }
 
-    private void FallAnim()
+    private void Block()
     {
-        float verticalSpeed = _samurai.velocity.y;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _heroAnimation.SetBool("isBlock",true);
+            Debug.Log("block");
+        }
+        else
+        {
+            _heroAnimation.SetBool("isBlock",false);
+        }
     }
-    private void Fall() 
-    { 
-        if (_samurai.velocity.y > 0.05f) 
-        { 
-            _heroAnimation.isJump = false;
-            _heroAnimation.isFall = isFall;
-            Invoke("FallAnim", 0.1f);
-        } 
-    }
-    
-    
-
 }
