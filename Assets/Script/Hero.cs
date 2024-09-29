@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
@@ -26,44 +27,54 @@ public class Hero : MonoBehaviour
 
     private void Update()
     {
+        Animation(input.x);
         Attack();
         Block();
         //Jump();
         MoveHero();
         Sitdown();
+        Run();
     }
     
     private void MoveHero()
     {
         input.x = Input.GetAxis("Horizontal");
-        transform.position += input * _speed * Time.deltaTime;
-        isMove = input.x != 0 ? true : false;
         
-        if (isMove)
+        _samurai.velocity = new Vector2(input.x * _speed, _samurai.velocity.y);
+
+        if (!isMove && input.x < 0 || isMove && input.x >0)
         {
-            _heroSprite.flipX = input.x < 0;
-            _heroAnimation.SetBool("isWalk", true);
-            Debug.Log("walk");   
+            Flip();
         }
-        else
-        {
-            _heroAnimation.SetBool("isWalk", false);
-        }
-        
-        if (isMove && Input.GetKey(KeyCode.RightShift))
+    }
+
+    private void Animation(float input)
+    {
+        _heroAnimation.SetBool("isWalk", Mathf.Abs(input) > 0.1f);
+    }
+    
+    private void Flip()
+    {
+        isMove = !isMove;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+    private void Run()
+    {
+        if (isMove && Input.GetKey(KeyCode.RightShift) || !isMove && Input.GetKey(KeyCode.RightShift))
         {
             _speed = _runSpeed;
             _heroAnimation.SetBool("isRun", true);
             Debug.Log("run");
         }
-        else if(isMove && Input.GetKeyUp(KeyCode.RightShift))
+        else if(isMove && Input.GetKeyUp(KeyCode.RightShift) || !isMove && Input.GetKeyUp(KeyCode.RightShift))
         {
             _speed = _speedWalk;
             _heroAnimation.SetBool("isRun", false);
             _heroAnimation.SetBool("isWalk", true);
-        }
+        } 
     }
-
+    
     // private void Jump()
     // {
     //     if (Input.GetKey(KeyCode.UpArrow) && Mathf.Abs(_samurai.velocity.y) <0.05f)
