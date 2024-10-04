@@ -10,19 +10,18 @@ public class Hero : MonoBehaviour
     [SerializeField] private SpriteRenderer _heroSprite;
 
     private Rigidbody2D _samurai;
-    private Animator _heroAnimation;
+    [SerializeField] private Animator _heroAnimation;
 
     private Vector3 input;
     private bool isMove;
 
-    private int _speedWalk = 2;
+    private float _speedWalk = 0.9f;
 
     public bool isGrounded;
     
     private void Start()
     {
         _samurai = GetComponent<Rigidbody2D>();
-        _heroAnimation = GetComponent<Animator>();
     }
 
     private void Update()
