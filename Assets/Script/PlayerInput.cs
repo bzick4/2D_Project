@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         float horizontal = Input.GetAxis(GlobalStringVars.HORIZONTAL_AXIS);
+        float vertical = Input.GetAxis(GlobalStringVars.VERTICAL_AXIS);
         bool isJumpButton = Input.GetButtonDown(GlobalStringVars.JUMP);
         
         
