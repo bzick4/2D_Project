@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _JumpOffset;
     
     [SerializeField] private Animator _HeroAnimation;
+    [SerializeField] private Health _Health;
 
     
     private Rigidbody2D _samuraiRb;
@@ -33,12 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Attack();
-        Block();
-        KeyJump();
+        Animations();
         Move(direction:0f);
-        Sitdown();
-        Run();
     }
 
     private void FixedUpdate()
@@ -53,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             _HeroAnimation.SetBool("isAttack",true);
-            Debug.Log("Attack");
+            
+            //Debug.Log("Attack");
         }
         else
         {
@@ -64,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Block()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Space))
         {
             _HeroAnimation.SetBool("isBlock",true);
             Debug.Log("block");
@@ -72,6 +70,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _HeroAnimation.SetBool("isBlock",false);
+        }
+    }
+
+    private void Dead()
+    {
+        if (_Health.isAlive == false)
+        {
+            _HeroAnimation.SetBool("isDead", true);
         }
     }
     
@@ -120,11 +126,11 @@ public class PlayerMovement : MonoBehaviour
     
     private void KeyJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
         {
             isJumped = true;
         }
-        else if (Input.GetKeyUp(KeyCode.Space) && !isGrounded)
+        else if (Input.GetKeyUp(KeyCode.UpArrow) && !isGrounded)
         {
             isJumped = false;;
         }
@@ -169,6 +175,16 @@ public class PlayerMovement : MonoBehaviour
         {
             _HeroAnimation.SetBool("isSitdown", false);
         }
+    }
+
+    private void Animations()
+    {
+        Attack();
+        Block();
+        Dead();
+        KeyJump();
+        Run();
+        Sitdown();
     }
     
 }

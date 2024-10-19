@@ -7,16 +7,16 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
 
-    [SerializeField] private float _force;
-    [SerializeField] private SliderJoint2D _sliderJointPlatform;
-    [SerializeField] private GameObject _pointEffector, _pressE;
-    [SerializeField] private Rigidbody2D _rbPlatform;
+    [SerializeField] private float _Force;
+    [SerializeField] private SliderJoint2D _SliderJointPlatform;
+    [SerializeField] private GameObject _PointEffector, _PressE;
+    [SerializeField] private Rigidbody2D _RbPlatform;
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Hero"))
         {
-            _pressE.SetActive(true);
+            _PressE.SetActive(true);
             PressButton();
         }
     }
@@ -25,7 +25,7 @@ public class Platform : MonoBehaviour
     {
         if (other.CompareTag("Hero"))
         { 
-            _pressE.SetActive(false); 
+            _PressE.SetActive(false); 
         }
     }
 
@@ -40,15 +40,15 @@ public class Platform : MonoBehaviour
     
     private void PlatformUp()
     {
-        _rbPlatform.isKinematic= false;
-        _sliderJointPlatform.useMotor = true;
-        JointMotor2D platform = _sliderJointPlatform.motor;
-        platform.motorSpeed = _force;
+        _RbPlatform.isKinematic= false;
+        _SliderJointPlatform.useMotor = true;
+        JointMotor2D platform = _SliderJointPlatform.motor;
+        platform.motorSpeed = _Force;
     }
 
     private void PointEff()
     {
-        _pointEffector.SetActive(true);
+        _PointEffector.SetActive(true);
     }
     
     
