@@ -7,13 +7,12 @@ public class Health : MonoBehaviour
     [SerializeField] private Image _ImageHP;
     public float _currentHealth{ get; private set;}
 
-    public bool isAlive { get; private set;}
+    private bool isAlive; 
 
 
     private  void Awake()
     {
         _currentHealth = _MaxHealth;
-        isAlive = true;
     }
 
     public void TakeDamage(float damage)
@@ -21,7 +20,6 @@ public class Health : MonoBehaviour
         _currentHealth -= damage;
         _ImageHP.fillAmount = _currentHealth / _MaxHealth;
         ChekIsAlive();
-        Debug.Log(_currentHealth);
     }
 
     private void ChekIsAlive()
@@ -33,8 +31,8 @@ public class Health : MonoBehaviour
         else
         {
             isAlive = false;
-            
         }
     }
+    
     
 }

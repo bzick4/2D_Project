@@ -99,8 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb0ac1b7b4214c5981f99b68f6b3e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Damage: 20
+  _AttackDamageMax: 10
+  _AttackDamageMin: 16
+  _AttackRange: 1
   _LifeTime: 0.3
+  _TargetLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!61 &2991266703253491945
 BoxCollider2D:
   m_ObjectHideFlags: 0

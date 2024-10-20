@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fd2ef86b6c64c4cc2b821b1a75d4a8ff
+guid: 58eeecdb13efc46568b28735da960b6e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,169 +110,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack_1_0
+      name: png-klev-club-9yhe-p-kamen-nozhnitsi-bumaga-png-31-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 0
-        width: 48
-        height: 67
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 75
+        y: 440
+        width: 333
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45f4ac6c588734f1489a2c269f9734e1
-      internalID: -1732249268
+      spriteID: 5e813a94c9cc14d139c4b0259cf4254e
+      internalID: -398406197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_1_1
+      name: png-klev-club-9yhe-p-kamen-nozhnitsi-bumaga-png-31-Photoroom_1
       rect:
         serializedVersion: 2
-        x: 129
-        y: 0
-        width: 54
-        height: 67
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 532
+        y: 82
+        width: 275
+        height: 447
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30f82c6a5be084e81a12735ed0ca565f
-      internalID: 2039127362
+      spriteID: ebc6cabe73f034416a4ee7ac54f10982
+      internalID: 1798093050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_1_2
+      name: png-klev-club-9yhe-p-kamen-nozhnitsi-bumaga-png-31-Photoroom_2
       rect:
         serializedVersion: 2
-        x: 213
-        y: 0
-        width: 57
-        height: 65
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 814
+        y: 429
+        width: 422
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bc4318f882e14f8f8e757a3890e0efb
-      internalID: -1318815490
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_1_3
-      rect:
-        serializedVersion: 2
-        x: 261
-        y: 40
-        width: 12
-        height: 12
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db84f9cf083214f0e9e7200d2be5f0bb
-      internalID: 204894765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_1_4
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 38
-        width: 9
-        height: 18
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23ef6aa786dbc4773b28b3deee677363
-      internalID: 1914839899
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_1_5
-      rect:
-        serializedVersion: 2
-        x: 273
-        y: 33
-        width: 9
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2306dc99dd834a9aba419ddd144e411
-      internalID: 1329843010
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_1_6
-      rect:
-        serializedVersion: 2
-        x: 289
-        y: 0
-        width: 63
-        height: 65
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3eeb135235894a53a97327b2a3ea59f
-      internalID: 455748323
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_1_7
-      rect:
-        serializedVersion: 2
-        x: 385
-        y: 0
-        width: 63
-        height: 65
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b24370113ba1d46f294023aac9da0472
-      internalID: 856214906
+      spriteID: ee4b6142d032e4c16a0f6aff84e48eb4
+      internalID: 2089199853
       vertices: []
       indices: 
       edges: []
@@ -288,14 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_1_0: -1732249268
-      Attack_1_1: 2039127362
-      Attack_1_2: -1318815490
-      Attack_1_3: 204894765
-      Attack_1_4: 1914839899
-      Attack_1_5: 1329843010
-      Attack_1_6: 455748323
-      Attack_1_7: 856214906
+      png-klev-club-9yhe-p-kamen-nozhnitsi-bumaga-png-31-Photoroom_0: -398406197
+      png-klev-club-9yhe-p-kamen-nozhnitsi-bumaga-png-31-Photoroom_1: 1798093050
+      png-klev-club-9yhe-p-kamen-nozhnitsi-bumaga-png-31-Photoroom_2: 2089199853
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

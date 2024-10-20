@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private Animator _HeroAnimation;
     [SerializeField] private Health _Health;
+    [SerializeField] private DamageDealler _DamageDealler;
 
     
     private Rigidbody2D _samuraiRb;
@@ -34,8 +35,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Animations();
+        Attack();
+        Block();
+        // Dead();
+        KeyJump();
         Move(direction:0f);
+        Run();
+        Sitdown();
     }
 
     private void FixedUpdate()
@@ -43,14 +49,12 @@ public class PlayerMovement : MonoBehaviour
         CheckGround();
         Jump();
     }
-
     
     private void Attack()
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
             _HeroAnimation.SetBool("isAttack",true);
-            
             //Debug.Log("Attack");
         }
         else
@@ -73,13 +77,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Dead()
-    {
-        if (_Health.isAlive == false)
-        {
-            _HeroAnimation.SetBool("isDead", true);
-        }
-    }
+    // private void Dead()
+    // {
+    //     if (_Health.isAlive == false)
+    //     {
+    //         _HeroAnimation.SetTrigger("isDead");
+    //     }
+    // }
     
     private void Flip()
     {
@@ -176,15 +180,6 @@ public class PlayerMovement : MonoBehaviour
             _HeroAnimation.SetBool("isSitdown", false);
         }
     }
-
-    private void Animations()
-    {
-        Attack();
-        Block();
-        Dead();
-        KeyJump();
-        Run();
-        Sitdown();
-    }
+    
     
 }
