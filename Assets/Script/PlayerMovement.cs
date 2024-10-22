@@ -35,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+        //Attack();
         Block();
-        // Dead();
+        Dead();
         KeyJump();
         Move(direction:0f);
         Run();
@@ -77,13 +77,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // private void Dead()
-    // {
-    //     if (_Health.isAlive == false)
-    //     {
-    //         _HeroAnimation.SetTrigger("isDead");
-    //     }
-    // }
+    private void Dead()
+    {
+        if (_Health._currentHealth <=0 )
+        {
+            _HeroAnimation.SetBool("isDead",true);
+        }
+    }
     
     private void Flip()
     {
@@ -108,6 +108,16 @@ public class PlayerMovement : MonoBehaviour
         _samuraiRb.velocity = new Vector2(_currentSpeed*direction, _samuraiRb.velocity.y);
     }
 
+    private void Hurt(float damage)
+    {
+        if (_Health._currentHealth==-damage)
+        {
+            _HeroAnimation.SetBool("isHurt",true);
+        }
+        
+    }
+    
+    
     private void Jump()
     {
         if (isJumped && isGrounded)
