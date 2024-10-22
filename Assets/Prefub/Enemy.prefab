@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7093035065905315919}
   - component: {fileID: 5499331795963306655}
   - component: {fileID: 2754172865801947729}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ButtonPapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 2989668364137714275}
   - component: {fileID: 492201602061433024}
   - component: {fileID: 1332155616666794399}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BattlePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 6811937258154730878}
   - component: {fileID: 2585118203691267572}
   - component: {fileID: 5881575897669985541}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ButtonScissors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 8720598451511667278}
   - component: {fileID: 3578543768758205}
   - component: {fileID: 8152742471109764773}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ButtonRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 6841848159580496272}
   - component: {fileID: 5589136546351397157}
   - component: {fileID: 5286186228977737412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PressE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 4015232204298984270}
   - component: {fileID: 3656009738239046522}
   - component: {fileID: 9156013050806594716}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 9017522141965703280}
   - component: {fileID: 1865620451210587866}
   - component: {fileID: 2307088798636762913}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1106,7 +1106,7 @@ GameObject:
   - component: {fileID: 3817096988697054344}
   - component: {fileID: 3697357768873506149}
   - component: {fileID: 6436222567638433277}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,6 +1178,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4410082094281328216}
     m_Modifications:
+    - target: {fileID: 240161097334881695, guid: 2f9cab164f5ce4b888caed1e2761d535, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2030751577354827616, guid: 2f9cab164f5ce4b888caed1e2761d535, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2494435888500341853, guid: 2f9cab164f5ce4b888caed1e2761d535, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1261,6 +1269,10 @@ PrefabInstance:
     - target: {fileID: 3146381351217686149, guid: 2f9cab164f5ce4b888caed1e2761d535, type: 3}
       propertyPath: m_Name
       value: HP_Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146381351217686149, guid: 2f9cab164f5ce4b888caed1e2761d535, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

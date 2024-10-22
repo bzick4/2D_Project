@@ -50,7 +50,6 @@ public class BattleManager : MonoBehaviour
         if (playerChoice == enemyChoice)
         {
             Debug.Log("Ничья!");
-            // Здесь можно добавить логику, что делать при ничье, например, повторить раунд
         }
         else if ((playerChoice == "Rock" && enemyChoice == "Scissors") ||
                  (playerChoice == "Paper" && enemyChoice == "Rock") ||
@@ -58,7 +57,7 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("Игрок победил!");
             _HeroAnimator.SetBool("isAttack", true);
-            //_EnemyAnimator.SetBool("",true);
+            //_EnemyAnimator.SetTrigger("Hurt");
             enemy.GetComponent<Health>().TakeDamage(damage: 50);
             Invoke("StopAnimation", 0.8f);
 
@@ -67,10 +66,10 @@ public class BattleManager : MonoBehaviour
         {
             Debug.Log("Враг победил!");
             _EnemyAnimator.SetTrigger("Attack");
-            _HeroAnimator.SetBool("isHurt", true);
+            _HeroAnimator.SetTrigger("Hurt");
             player.GetComponent<Health>().TakeDamage(damage: 50);
             StartCoroutine(StopAnimationEnemy(0.8f));
-            StopAnimation();
+            
         }
     }
 
@@ -78,14 +77,13 @@ public class BattleManager : MonoBehaviour
     private void StopAnimation()
     {
         _HeroAnimator.SetBool("isAttack", false);
-        _HeroAnimator.SetBool("isHurt", false);
-        
     }
 
     private IEnumerator StopAnimationEnemy(float deley)
     {
         yield return new WaitForSeconds(deley);
         _EnemyAnimator.SetTrigger("Idle");
+        _HeroAnimator.SetBool("isIdle",true);
 
     }
     
