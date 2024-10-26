@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator _HeroAnimation;
     [SerializeField] private Health _Health;
     [SerializeField] private DamageDealler _DamageDealler;
+    [SerializeField] private GameObject _PanelLose;
 
     
     private Rigidbody2D _samuraiRb;
@@ -82,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         if (_Health._currentHealth <=0 )
         {
             _HeroAnimation.SetBool("isDead",true);
+            _PanelLose.SetActive(true);
         }
     }
     
@@ -114,9 +116,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _HeroAnimation.SetBool("isHurt",true);
         }
-        
     }
-    
     
     private void Jump()
     {
@@ -190,6 +190,5 @@ public class PlayerMovement : MonoBehaviour
             _HeroAnimation.SetBool("isSitdown", false);
         }
     }
-    
     
 }

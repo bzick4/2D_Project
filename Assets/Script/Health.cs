@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,11 +8,14 @@ public class Health : MonoBehaviour
     [SerializeField] private Image _ImageHP;
     public float _currentHealth{ get; private set;}
 
-    private bool isAlive; 
-
-
+    private bool isAlive;
+    
     private  void Awake()
     {
+        if (PlayerPrefs.HasKey("Health"))
+        {
+            _currentHealth = PlayerPrefs.GetFloat("Health");
+        }
         _currentHealth = _MaxHealth;
     }
 
@@ -19,6 +23,8 @@ public class Health : MonoBehaviour
     {
         _currentHealth -= damage;
         _ImageHP.fillAmount = _currentHealth / _MaxHealth;
+        PlayerPrefs.SetFloat("Health", _currentHealth);
+        PlayerPrefs.Save();
         ChekIsAlive();
     }
 

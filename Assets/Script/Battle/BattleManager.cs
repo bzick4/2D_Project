@@ -1,79 +1,69 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI; // для работы с кнопками и UI
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
-    public GameObject player; // Игрок на сцене боя
-    public GameObject enemy;  // Враг на сцене боя
-    public GameObject playerController;
-
-    public Button rockButton;  // Кнопка "Камень"
-    public Button paperButton; // Кнопка "Бумага"
-    public Button scissorsButton; // Кнопка "Ножницы"
-
-    private string[] options = { "Rock", "Paper", "Scissors" }; // Варианты выбора
-    private string playerChoice;
-    private string enemyChoice;
-
+    [SerializeField] private GameObject _Player,_Enemy; 
+    [SerializeField] private Button _RockButton,_PaperButton, _ScissorsButton;
     [SerializeField] private Animator _EnemyAnimator, _HeroAnimator;
 
-    void Start()
+    private string[] _options = { "Rock", "Paper", "Scissors" }; // Варианты выбора
+    private string _playerChoice;
+    private string _enemyChoice;
+    
+    private void Start()
     {
-        // Привязываем кнопки к методам
-        rockButton.onClick.AddListener(() => PlayerChoice("Rock"));
-        paperButton.onClick.AddListener(() => PlayerChoice("Paper"));
-        scissorsButton.onClick.AddListener(() => PlayerChoice("Scissors"));
+        _RockButton.onClick.AddListener(() => PlayerChoice("Rock"));
+        _PaperButton.onClick.AddListener(() => PlayerChoice("Paper"));
+        _ScissorsButton.onClick.AddListener(() => PlayerChoice("Scissors"));
     }
 
     // Выбор игрока
-    void PlayerChoice(string choice)
+    private  void PlayerChoice(string choice)
     {
-        playerChoice = choice;
-        Debug.Log("Игрок выбрал: " + playerChoice);
+        _playerChoice = choice;
+        Debug.Log("Игрок выбрал: " + _playerChoice);
 
         EnemyChoice();
         DetermineWinner();
     }
 
     // Выбор врага случайным образом
-    void EnemyChoice()
+    private void EnemyChoice()
     {
-        int randomIndex = Random.Range(0, options.Length);
-        enemyChoice = options[randomIndex];
-        Debug.Log("Враг выбрал: " + enemyChoice);
+        int randomIndex = Random.Range(0, _options.Length);
+        _enemyChoice = _options[randomIndex];
+        Debug.Log("Враг выбрал: " + _enemyChoice);
     }
 
     // Определение победителя
-    void DetermineWinner()
+    private void DetermineWinner()
     {
-        if (playerChoice == enemyChoice)
+        if (_playerChoice == _enemyChoice)
         {
             Debug.Log("Ничья!");
         }
-        else if ((playerChoice == "Rock" && enemyChoice == "Scissors") ||
-                 (playerChoice == "Paper" && enemyChoice == "Rock") ||
-                 (playerChoice == "Scissors" && enemyChoice == "Paper"))
+        else if ((_playerChoice == "Rock" && _enemyChoice == "Scissors") ||
+                 (_playerChoice == "Paper" && _enemyChoice == "Rock") ||
+                 (_playerChoice == "Scissors" && _enemyChoice == "Paper"))
         {
             Debug.Log("Игрок победил!");
             _HeroAnimator.SetBool("isAttack", true);
             //_EnemyAnimator.SetTrigger("Hurt");
-            enemy.GetComponent<Health>().TakeDamage(damage: 50);
+            _Enemy.GetComponent<Health>().TakeDamage(damage: 50);
             Invoke("StopAnimation", 0.8f);
-
         }
         else
         {
             Debug.Log("Враг победил!");
             _EnemyAnimator.SetTrigger("Attack");
             _HeroAnimator.SetTrigger("Hurt");
-            player.GetComponent<Health>().TakeDamage(damage: 50);
+            _Player.GetComponent<Health>().TakeDamage(damage: 50);
             StartCoroutine(StopAnimationEnemy(0.8f));
-            
         }
     }
-
-
+    
     private void StopAnimation()
     {
         _HeroAnimator.SetBool("isAttack", false);

@@ -1,16 +1,20 @@
-
 using System;
 using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
     [SerializeField] private GameObject _ButtonBattle, _PanelBattle;
-    
+    private bool isActive = true;
+
     void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Hero"))
         {
-            _ButtonBattle.SetActive(true);
+            if (isActive)
+            {
+                _ButtonBattle.SetActive(true);
+            }
+
             PressBattleBotton();
         }
     }
@@ -19,20 +23,24 @@ public class EnemyCollision : MonoBehaviour
     {
         if (collision.CompareTag("Hero"))
         {
-            _ButtonBattle.SetActive(false);
+           FalsePanels();
+           isActive = true;
         }
     }
 
+    public void FalsePanels()
+    {
+        _ButtonBattle.SetActive(false);
+        _PanelBattle.SetActive(false);
+    }
+    
     private void PressBattleBotton()
     {
         if (Input.GetKey(KeyCode.E))
         {
             _PanelBattle.SetActive(true);
             _ButtonBattle.SetActive(false);
+            isActive = false;
         }
     }
-    
-    
-    
-    
 }
