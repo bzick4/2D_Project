@@ -8,7 +8,7 @@ public class EnemyCollision : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Hero"))
+        if (collision.CompareTag("Enemy"))
         {
             if (isActive)
             {
@@ -21,19 +21,14 @@ public class EnemyCollision : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Hero"))
+        if (collision.CompareTag("Enemy"))
         {
-           FalsePanels();
-           isActive = true;
+            _ButtonBattle.SetActive(false);
+            _PanelBattle.SetActive(false);
+            isActive = true;
         }
     }
 
-    public void FalsePanels()
-    {
-        _ButtonBattle.SetActive(false);
-        _PanelBattle.SetActive(false);
-    }
-    
     private void PressBattleBotton()
     {
         if (Input.GetKey(KeyCode.E))

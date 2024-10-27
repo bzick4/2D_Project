@@ -21,7 +21,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 1f);
         } 
     }
-    
-    
+
+    public void Attack()
+    {
+        _EnemyAnimation.SetTrigger("Attack");
+    }
 }
 

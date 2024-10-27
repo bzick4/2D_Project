@@ -51,6 +51,7 @@ public class BattleManager : MonoBehaviour
             Debug.Log("Игрок победил!");
             _HeroAnimator.SetBool("isAttack", true);
             //_EnemyAnimator.SetTrigger("Hurt");
+            GameObject.FindGameObjectWithTag("Enemy");
             _Enemy.GetComponent<Health>().TakeDamage(damage: 50);
             Invoke("StopAnimation", 0.8f);
         }
