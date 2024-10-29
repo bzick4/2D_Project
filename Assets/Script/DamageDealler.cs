@@ -13,7 +13,7 @@ public class DamageDealler : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             float ramdomDamage = Random.Range(_AttackDamageMin, _AttackDamageMax);
-          collision.gameObject.GetComponent<Health>().TakeDamage(ramdomDamage);
+          collision.gameObject.GetComponent<Health>().ApplyDamage(ramdomDamage);
         }
         Destroy(gameObject);
     }

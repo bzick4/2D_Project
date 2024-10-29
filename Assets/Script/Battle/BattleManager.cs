@@ -1,17 +1,36 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _Player,_Enemy; 
+   // private GameObject _Player,_Enemy; 
     [SerializeField] private Button _RockButton,_PaperButton, _ScissorsButton;
-    [SerializeField] private Animator _EnemyAnimator, _HeroAnimator;
+    private Animator _enemyAnimator, _heroAnimator;
+    private Health _heroHealth, _enemyHealth;
 
-    private string[] _options = { "Rock", "Paper", "Scissors" }; // Варианты выбора
+    private string[] _options = { "Rock", "Paper", "Scissors" };
     private string _playerChoice;
     private string _enemyChoice;
     
+    private void Awake()
+    {
+        _enemyHealth = GetComponent<Health>();
+        _enemyAnimator = GetComponentInChildren<Animator>();
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Hero"))
+        {
+            Debug.Log(collision.gameObject.name);
+            _heroAnimator = GetComponent<Animator>();
+            _heroHealth = collision.GetComponentInParent<Health>();
+        }
+    }
+
     private void Start()
     {
         _RockButton.onClick.AddListener(() => PlayerChoice("Rock"));
@@ -49,33 +68,31 @@ public class BattleManager : MonoBehaviour
                  (_playerChoice == "Scissors" && _enemyChoice == "Paper"))
         {
             Debug.Log("Игрок победил!");
-            _HeroAnimator.SetBool("isAttack", true);
-            //_EnemyAnimator.SetTrigger("Hurt");
-            GameObject.FindGameObjectWithTag("Enemy");
-            _Enemy.GetComponent<Health>().TakeDamage(damage: 50);
-            Invoke("StopAnimation", 0.8f);
+            _heroAnimator.SetBool("isAttack", true);
+            //_enemyHealth.ApplyDamage(damage: 50);
+           // Invoke("StopAnimation", 0.8f);
         }
         else
         {
             Debug.Log("Враг победил!");
-            _EnemyAnimator.SetTrigger("Attack");
-            _HeroAnimator.SetTrigger("Hurt");
-            _Player.GetComponent<Health>().TakeDamage(damage: 50);
-            StartCoroutine(StopAnimationEnemy(0.8f));
+            
+            //_enemyAnimator.SetTrigger("Attack");
+            //_heroHealth.ApplyDamage(damage: 50);
+            //StartCoroutine(StopAnimationEnemy(0.8f));
         }
     }
     
     private void StopAnimation()
     {
-        _HeroAnimator.SetBool("isAttack", false);
+        _heroAnimator.SetBool("isAttack", false);
+        _enemyAnimator.SetTrigger("Idle");
     }
 
     private IEnumerator StopAnimationEnemy(float deley)
     {
         yield return new WaitForSeconds(deley);
-        _EnemyAnimator.SetTrigger("Idle");
-        _HeroAnimator.SetBool("isIdle",true);
-
+        _enemyAnimator.SetTrigger("Idle");
+        _heroAnimator.SetBool("isIdle",true);
     }
     
 }

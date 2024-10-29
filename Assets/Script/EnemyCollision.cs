@@ -5,6 +5,7 @@ public class EnemyCollision : MonoBehaviour
 {
     [SerializeField] private GameObject _ButtonBattle, _PanelBattle;
     private bool isActive = true;
+    
 
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -14,7 +15,6 @@ public class EnemyCollision : MonoBehaviour
             {
                 _ButtonBattle.SetActive(true);
             }
-
             PressBattleBotton();
         }
     }

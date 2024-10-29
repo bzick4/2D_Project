@@ -16,9 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask _GroundMask;
     [SerializeField] private float _JumpOffset;
     
-    [SerializeField] private Animator _HeroAnimation;
-    [SerializeField] private Health _Health;
-    [SerializeField] private DamageDealler _DamageDealler;
+    private Animator _animator;
+    private Health _health;
     [SerializeField] private GameObject _PanelLose;
 
     
@@ -30,13 +29,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponentInChildren<Animator>();
+        _health = GetComponent<Health>();
         _samuraiRb = GetComponent<Rigidbody2D>();
         _currentSpeed = _Speed;
     }
 
     private void Update()
     {
-        //Attack();
         Block();
         Dead();
         KeyJump();
@@ -51,38 +51,40 @@ public class PlayerMovement : MonoBehaviour
         Jump();
     }
     
-    private void Attack()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            _HeroAnimation.SetBool("isAttack",true);
-            //Debug.Log("Attack");
-        }
-        else
-        {
-            _HeroAnimation.SetBool("isAttack",false);
-        }
-        
-    }
-
     private void Block()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            _HeroAnimation.SetBool("isBlock",true);
+            _animator.SetBool("isBlock",true);
             Debug.Log("block");
         }
         else
         {
-            _HeroAnimation.SetBool("isBlock",false);
+            _animator.SetBool("isBlock",false);
         }
     }
+    
+    private void OnEnable()
+    { 
+        if (_health != null) 
+        { 
+            Health.OnDamage += Dead;
+        } 
+    }
 
+    private void OnDisable()
+    {
+        if (_health != null)
+        {
+            Health.OnDamage -= Dead;
+        }
+    }
+    
     private void Dead()
     {
-        if (_Health._currentHealth <=0 )
+        if (_health._currentHealth <=0 )
         {
-            _HeroAnimation.SetBool("isDead",true);
+            _animator.SetBool("isDead",true);
             _PanelLose.SetActive(true);
         }
     }
@@ -100,8 +102,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            _HeroAnimation.SetBool("isJump", false);
-            _HeroAnimation.SetBool("isFall", false);
+            _animator.SetBool("isJump", false);
+            _animator.SetBool("isFall", false);
         }
     }
     
@@ -109,30 +111,22 @@ public class PlayerMovement : MonoBehaviour
     { 
         _samuraiRb.velocity = new Vector2(_currentSpeed*direction, _samuraiRb.velocity.y);
     }
-
-    private void Hurt(float damage)
-    {
-        if (_Health._currentHealth==-damage)
-        {
-            _HeroAnimation.SetBool("isHurt",true);
-        }
-    }
     
     private void Jump()
     {
         if (isJumped && isGrounded)
         { 
             _samuraiRb.AddForce(Vector2.up * _JumpForce, ForceMode2D.Impulse);
-            _HeroAnimation.SetBool("isJump", true);
-            _HeroAnimation.SetBool("isRun", false);
+            _animator.SetBool("isJump", true);
+            _animator.SetBool("isRun", false);
             
             isJumped = false;
             Debug.Log("jump");
         }
         else if (!isGrounded && _samuraiRb.velocity.y<0)
         {
-            _HeroAnimation.SetBool("isFall", true);
-            _HeroAnimation.SetBool("isJump", false);
+            _animator.SetBool("isFall", true);
+            _animator.SetBool("isJump", false);
             
             Debug.Log("fall");
         }
@@ -155,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(direction) > 0.01f)
         {
             HorizontalMovement(direction);
-            _HeroAnimation.SetFloat("Walk",_samuraiRb.velocity.magnitude);
+            _animator.SetFloat("Walk",_samuraiRb.velocity.magnitude);
         }
         
         if(!isMove && direction < 0 || isMove && direction >0)
@@ -169,12 +163,12 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.RightShift) && isGrounded && isMove || Input.GetKeyDown(KeyCode.RightShift) && isGrounded && !isMove)
         {
             _currentSpeed = _RunSpeed;
-            _HeroAnimation.SetBool("isRun", true);
+            _animator.SetBool("isRun", true);
         }
         else if(Input.GetKeyUp(KeyCode.RightShift))
         {
             _currentSpeed = _Speed;
-            _HeroAnimation.SetBool("isRun", false);
+            _animator.SetBool("isRun", false);
         }
     }
     
@@ -182,12 +176,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.DownArrow) && isGrounded)
         {
-            _HeroAnimation.SetBool("isSitdown", true);
+            _animator.SetBool("isSitdown", true);
             Debug.Log("sitdown");
         }
         else
         {
-            _HeroAnimation.SetBool("isSitdown", false);
+            _animator.SetBool("isSitdown", false);
         }
     }
     

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public float X, Y;
+    private float X, Y;
     private Transform _player;
 
     private void Start()

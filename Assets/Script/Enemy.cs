@@ -1,30 +1,44 @@
-
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Animator _EnemyAnimation;
-    [SerializeField] private Health _Health;
+    private Animator _enemyAnimation;
+    private Health _health;
+
+    public static Action OnDamageEnemy;
     
-    private void Update()
+    private void Awake()
     {
-        Health();
+        _enemyAnimation = GetComponentInChildren<Animator>();
+        _health = GetComponent<Health>();
     }
 
-    private void Health()
-    {
-        if (_Health._currentHealth <=0)
-        {
-            _EnemyAnimation.SetTrigger("Dead");
-            Destroy(gameObject, 1f);
+    private void OnEnable()
+    { 
+        if (_health != null) 
+        { 
+            Health.OnDamage += Dead;
         } 
     }
 
-    public void Attack()
+    private void OnDisable()
     {
-        _EnemyAnimation.SetTrigger("Attack");
+        if (_health != null)
+        {
+            Health.OnDamage -= Dead;
+        }
     }
+    
+    private void Dead()
+    {
+        if (_health._currentHealth <=0)
+        {
+            _enemyAnimation.SetTrigger("Dead");
+            Destroy(gameObject, 1f);
+        } 
+    }
+    
 }
 
