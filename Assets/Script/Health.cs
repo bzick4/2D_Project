@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     private Animator _animator;
     private bool isAlive;
     
-    public float _currentHealth{ get; private set;}
+    public float _currentHealth{ get; set;}
     public static Action OnDamage;
     
     private  void Awake()
@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         _currentHealth -= damage;
-        _ImageHP.fillAmount = _currentHealth / _MaxHealth;
+        UpdateHpBar();
         _animator.SetTrigger("Hurt");
         OnDamage?.Invoke();
         PlayerPrefs.SetFloat("Health", _currentHealth);
@@ -35,6 +35,12 @@ public class Health : MonoBehaviour
         ChekIsAlive();
     }
 
+    public void UpdateHpBar()
+    {
+        _ImageHP.fillAmount = _currentHealth / _MaxHealth; 
+    }
+    
+    
     private void ChekIsAlive()
     {
         if (_currentHealth > 0)

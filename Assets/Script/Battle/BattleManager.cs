@@ -1,43 +1,67 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
 {
-   // private GameObject _Player,_Enemy; 
     [SerializeField] private Button _RockButton,_PaperButton, _ScissorsButton;
     private Animator _enemyAnimator, _heroAnimator;
     private Health _heroHealth, _enemyHealth;
 
     private string[] _options = { "Rock", "Paper", "Scissors" };
-    private string _playerChoice;
-    private string _enemyChoice;
+    private string _playerChoice, _enemyChoice;
     
     private void Awake()
     {
         _enemyHealth = GetComponent<Health>();
         _enemyAnimator = GetComponentInChildren<Animator>();
+        
+        if (_enemyHealth == null)
+        {
+            Debug.Log("health vraga ne naiden");
+        }
+        
+        if (_enemyAnimator == null)
+        {
+            Debug.Log("animator vraga ne naiden");
+        }
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Hero"))
         {
-            Debug.Log(collision.gameObject.name);
-            _heroAnimator = GetComponent<Animator>();
+            _heroAnimator = collision.GetComponentInChildren<Animator>();
+            if (_heroAnimator == null)
+            {
+                Debug.Log("animator hero ne naiden");
+            }
+            else
+            {
+                Debug.Log("animator hero naiden");
+            }
             _heroHealth = collision.GetComponentInParent<Health>();
+            if (_heroHealth == null)
+            {
+                Debug.Log("health hero ne naiden");
+            }
+            else
+            {
+                Debug.Log("health hero naiden");
+            }
         }
     }
 
     private void Start()
-    {
+    { 
         _RockButton.onClick.AddListener(() => PlayerChoice("Rock"));
         _PaperButton.onClick.AddListener(() => PlayerChoice("Paper"));
         _ScissorsButton.onClick.AddListener(() => PlayerChoice("Scissors"));
     }
-
+    
     // Выбор игрока
     private  void PlayerChoice(string choice)
     {
@@ -45,6 +69,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Игрок выбрал: " + _playerChoice);
 
         EnemyChoice();
+        
         DetermineWinner();
     }
 
@@ -59,27 +84,26 @@ public class BattleManager : MonoBehaviour
     // Определение победителя
     private void DetermineWinner()
     {
-        if (_playerChoice == _enemyChoice)
-        {
-            Debug.Log("Ничья!");
-        }
-        else if ((_playerChoice == "Rock" && _enemyChoice == "Scissors") ||
-                 (_playerChoice == "Paper" && _enemyChoice == "Rock") ||
-                 (_playerChoice == "Scissors" && _enemyChoice == "Paper"))
-        {
-            Debug.Log("Игрок победил!");
-            _heroAnimator.SetBool("isAttack", true);
-            //_enemyHealth.ApplyDamage(damage: 50);
-           // Invoke("StopAnimation", 0.8f);
-        }
-        else
-        {
-            Debug.Log("Враг победил!");
-            
-            //_enemyAnimator.SetTrigger("Attack");
-            //_heroHealth.ApplyDamage(damage: 50);
-            //StartCoroutine(StopAnimationEnemy(0.8f));
-        }
+            if (_playerChoice == _enemyChoice)
+            {
+                Debug.Log("Ничья!");
+            }
+            else if ((_playerChoice == "Rock" && _enemyChoice == "Scissors") ||
+                     (_playerChoice == "Paper" && _enemyChoice == "Rock") ||
+                     (_playerChoice == "Scissors" && _enemyChoice == "Paper"))
+            {
+                Debug.Log("Игрок победил!"); 
+                _heroAnimator.SetBool("isAttack", true); 
+                _enemyHealth.ApplyDamage(50); 
+                Invoke("StopAnimation", 0.8f);
+            }
+            else
+            {
+                Debug.Log("Враг победил!");
+                _enemyAnimator.SetTrigger("Attack");
+                _heroHealth.ApplyDamage(50);
+                StartCoroutine(StopAnimationEnemy(0.8f)); 
+            }
     }
     
     private void StopAnimation()

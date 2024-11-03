@@ -84,9 +84,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_health._currentHealth <=0 )
         {
-            _animator.SetBool("isDead",true);
-            _PanelLose.SetActive(true);
+            _animator.SetTrigger("Dead");
+            Invoke("LosePanele", 2f);
         }
+    }
+
+    private void LosePanele()
+    {
+        _PanelLose.SetActive(true);
     }
     
     private void Flip()
