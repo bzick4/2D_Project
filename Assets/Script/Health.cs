@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
     {
         _currentHealth -= damage;
         UpdateHpBar();
-        _animator.SetTrigger("Hurt");
+        _animator?.SetTrigger("Hurt");
         OnDamage?.Invoke();
         PlayerPrefs.SetFloat("Health", _currentHealth);
         PlayerPrefs.Save();
@@ -39,7 +39,6 @@ public class Health : MonoBehaviour
     {
         _ImageHP.fillAmount = _currentHealth / _MaxHealth; 
     }
-    
     
     private void ChekIsAlive()
     {

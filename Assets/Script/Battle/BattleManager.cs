@@ -13,6 +13,8 @@ public class BattleManager : MonoBehaviour
 
     private string[] _options = { "Rock", "Paper", "Scissors" };
     private string _playerChoice, _enemyChoice;
+
+    private bool isBattle = false;
     
     private void Awake()
     {
@@ -93,30 +95,30 @@ public class BattleManager : MonoBehaviour
                      (_playerChoice == "Scissors" && _enemyChoice == "Paper"))
             {
                 Debug.Log("Игрок победил!"); 
-                _heroAnimator.SetBool("isAttack", true); 
-                _enemyHealth.ApplyDamage(50); 
+                _heroAnimator?.SetBool("isAttack", true); 
+                _enemyHealth?.ApplyDamage(50); 
                 Invoke("StopAnimation", 0.8f);
             }
             else
             {
                 Debug.Log("Враг победил!");
-                _enemyAnimator.SetTrigger("Attack");
-                _heroHealth.ApplyDamage(50);
+                _enemyAnimator?.SetTrigger("Attack");
+                _heroHealth?.ApplyDamage(50);
                 StartCoroutine(StopAnimationEnemy(0.8f)); 
             }
     }
     
     private void StopAnimation()
     {
-        _heroAnimator.SetBool("isAttack", false);
-        _enemyAnimator.SetTrigger("Idle");
+        _heroAnimator?.SetBool("isAttack", false);
+        _enemyAnimator?.SetTrigger("Idle");
     }
 
     private IEnumerator StopAnimationEnemy(float deley)
     {
         yield return new WaitForSeconds(deley);
-        _enemyAnimator.SetTrigger("Idle");
-        _heroAnimator.SetBool("isIdle",true);
+        _enemyAnimator?.SetTrigger("Idle");
+        _heroAnimator?.SetBool("isIdle",true);
     }
     
 }
