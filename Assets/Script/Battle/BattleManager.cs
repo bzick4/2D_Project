@@ -10,10 +10,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Button _RockButton,_PaperButton, _ScissorsButton;
     private Animator _enemyAnimator, _heroAnimator;
     private Health _heroHealth, _enemyHealth;
-
-    private string[] _options = { "Rock", "Paper", "Scissors" };
+    
     private string _playerChoice, _enemyChoice;
-
+    
     private bool isBattle = false;
     
     private void Awake()
@@ -67,7 +66,7 @@ public class BattleManager : MonoBehaviour
     // Выбор игрока
     private  void PlayerChoice(string choice)
     {
-        _playerChoice = choice;
+         _playerChoice = choice;
         Debug.Log("Игрок выбрал: " + _playerChoice);
 
         EnemyChoice();
@@ -78,14 +77,28 @@ public class BattleManager : MonoBehaviour
     // Выбор врага случайным образом
     private void EnemyChoice()
     {
-        int randomIndex = Random.Range(0, _options.Length);
-        _enemyChoice = _options[randomIndex];
+        int randomChoice = Random.Range(0, 100);
+        if (randomChoice >= 0 && randomChoice <= 45)
+        {
+            _enemyChoice = "Rock";
+        }
+        else if (randomChoice >=46 && randomChoice <=88)
+        {
+            _enemyChoice = "Scissors";
+        }
+        else if(randomChoice >=89 && randomChoice <=99)
+        {
+            _enemyChoice = "Paper";
+        }
+        
         Debug.Log("Враг выбрал: " + _enemyChoice);
     }
 
     // Определение победителя
     private void DetermineWinner()
     {
+        float randomDamageble = Random.Range(10, 41);
+        
             if (_playerChoice == _enemyChoice)
             {
                 Debug.Log("Ничья!");
@@ -103,7 +116,8 @@ public class BattleManager : MonoBehaviour
             {
                 Debug.Log("Враг победил!");
                 _enemyAnimator?.SetTrigger("Attack");
-                _heroHealth?.ApplyDamage(50);
+                _heroHealth?.ApplyDamage(randomDamageble);
+                Debug.Log($"Враг нанес {randomDamageble} урона");
                 StartCoroutine(StopAnimationEnemy(0.8f)); 
             }
     }

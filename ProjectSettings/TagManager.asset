@@ -8,6 +8,8 @@ TagManager:
   - Hero
   - Enemy
   - Checkpoint
+  - FxTemporaire
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - Enemy
   - Damageble
   - GroundCheck
-  - 
-  - 
+  - Stone
+  - Coin
   - 
   - 
   - 

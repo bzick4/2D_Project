@@ -50,6 +50,7 @@ public class LoadCheckpoint : MonoBehaviour
 
     public void OnClickLoad()
     {
+    
         var loader = FindObjectOfType<LoadCheckpoint>();
         if (loader != null)
         {
