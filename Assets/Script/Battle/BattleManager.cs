@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -8,11 +6,11 @@ using Random = UnityEngine.Random;
 public class BattleManager : MonoBehaviour
 {
     [SerializeField] private Button _RockButton,_PaperButton, _ScissorsButton;
+    
     private Animator _enemyAnimator, _heroAnimator;
     private Health _heroHealth, _enemyHealth;
     
     private string _playerChoice, _enemyChoice;
-    
     private bool isBattle = false;
     
     private void Awake()
@@ -63,7 +61,6 @@ public class BattleManager : MonoBehaviour
         _ScissorsButton.onClick.AddListener(() => PlayerChoice("Scissors"));
     }
     
-    // Выбор игрока
     private  void PlayerChoice(string choice)
     {
          _playerChoice = choice;
@@ -73,8 +70,7 @@ public class BattleManager : MonoBehaviour
         
         DetermineWinner();
     }
-
-    // Выбор врага случайным образом
+    
     private void EnemyChoice()
     {
         int randomChoice = Random.Range(0, 100);
@@ -93,8 +89,7 @@ public class BattleManager : MonoBehaviour
         
         Debug.Log("Враг выбрал: " + _enemyChoice);
     }
-
-    // Определение победителя
+    
     private void DetermineWinner()
     {
         float randomDamageble = Random.Range(10, 41);

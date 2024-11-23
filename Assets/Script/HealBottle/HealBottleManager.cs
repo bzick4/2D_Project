@@ -4,7 +4,9 @@ using UnityEngine;
 public class HealBottleManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _HealBottle;
+    
     public int TotalHealBottle { get; private set; }
+    
     private void Start()
     {
         Enemy.OnGiveHealBottle += OnHealBottle;

@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float _MaxHealth;
     [SerializeField] private Image _ImageHP;
     
+    private ParticleSystem _damageParticle;
     private Animator _animator;
     private bool isAlive;
     
@@ -16,11 +17,7 @@ public class Health : MonoBehaviour
     private  void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
-        
-        if (PlayerPrefs.HasKey("Health"))
-        {
-            _currentHealth = PlayerPrefs.GetFloat("Health");
-        }
+        _damageParticle = GetComponentInChildren<ParticleSystem>();
         _currentHealth = _MaxHealth;
     }
 
@@ -29,9 +26,8 @@ public class Health : MonoBehaviour
         _currentHealth -= damage;
         UpdateHpBar();
         _animator?.SetTrigger("Hurt");
+        _damageParticle?.Play();
         OnDamage?.Invoke();
-        PlayerPrefs.SetFloat("Health", _currentHealth);
-        PlayerPrefs.Save();
         ChekIsAlive();
     }
 
@@ -52,4 +48,4 @@ public class Health : MonoBehaviour
         }
     }
     
-}
+    }

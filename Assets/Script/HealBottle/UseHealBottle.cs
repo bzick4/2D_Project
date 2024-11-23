@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UseHealBottle : MonoBehaviour
 {
     [SerializeField] private HealBottleManager _TotalBottle;
+    
     private Health _heroHealth;
     public static event Action OnDrinkHealBottle;
 
@@ -31,6 +30,5 @@ public class UseHealBottle : MonoBehaviour
     private void CureHero()
     {
         _heroHealth?.ApplyDamage(-40);
-        //добавить партикл 
     }
 }

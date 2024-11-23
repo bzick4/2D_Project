@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _Coin;
+    [SerializeField] private TMP_Text _Coin, _FinishCoin;
+    
     public int TotalCoin { get; private set; }
+    
     private void Start()
     {
         CoinScript.OnGiveCoin += OnCoin;
@@ -19,5 +21,6 @@ public class CoinManager : MonoBehaviour
     {
         TotalCoin++;
         _Coin.text = TotalCoin.ToString();
+        _FinishCoin.text = _Coin.text;
     }
 }

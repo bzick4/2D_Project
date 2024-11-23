@@ -15,11 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _GroundColliderTransform;
     [SerializeField] private LayerMask _GroundMask;
     [SerializeField] private float _JumpOffset;
+
+    [Header("Panels")] 
+    [SerializeField] private GameObject _PanelLose;
     
     private Animator _animator;
     private Health _health;
-    [SerializeField] private GameObject _PanelLose;
-
     
     private Rigidbody2D _samuraiRb;
     private bool isMove;
