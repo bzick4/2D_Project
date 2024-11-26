@@ -3,19 +3,29 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-    public static event Action OnGiveCoin;
+    [SerializeField] private int _CoinValue;
     [SerializeField] private GameObject _DestroyEffect;
+
+    private CounterBonus _counterBonus;
     
+    private void Awake()
+    {
+        _counterBonus = GetComponentInParent<CounterBonus>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Hero"))
         {
-            OnGiveCoin?.Invoke();
-            DestroyEffect();
-            Invoke("DestroyCoin", 0.2f);
+            if (_counterBonus != null)
+            {
+                _counterBonus.AddBonus(_CoinValue);
+                DestroyCoin();
+                DestroyEffect();
+            }
         }
     }
-    
+   
     private void DestroyCoin()
     {
         Destroy(gameObject);

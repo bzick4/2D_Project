@@ -92,7 +92,8 @@ public class BattleManager : MonoBehaviour
     
     private void DetermineWinner()
     {
-        float randomDamageble = Random.Range(10, 41);
+        float randomDamagebleEnemy = Random.Range(10, 41);
+        float randomDamagebleHero = Random.Range(38, 59);
         
             if (_playerChoice == _enemyChoice)
             {
@@ -104,15 +105,16 @@ public class BattleManager : MonoBehaviour
             {
                 Debug.Log("Игрок победил!"); 
                 _heroAnimator?.SetBool("isAttack", true); 
-                _enemyHealth?.ApplyDamage(50); 
+                _enemyHealth?.ApplyDamage(randomDamagebleHero); 
+                Debug.Log($"Герой нанес {randomDamagebleHero} урона");
                 Invoke("StopAnimation", 0.8f);
             }
             else
             {
                 Debug.Log("Враг победил!");
                 _enemyAnimator?.SetTrigger("Attack");
-                _heroHealth?.ApplyDamage(randomDamageble);
-                Debug.Log($"Враг нанес {randomDamageble} урона");
+                _heroHealth?.ApplyDamage(randomDamagebleEnemy);
+                Debug.Log($"Враг нанес {randomDamagebleEnemy} урона");
                 StartCoroutine(StopAnimationEnemy(0.8f)); 
             }
     }

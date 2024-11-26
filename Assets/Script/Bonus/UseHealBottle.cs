@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class UseHealBottle : MonoBehaviour
 {
-    [SerializeField] private HealBottleManager _TotalBottle;
-    
+    [SerializeField] private HealBottleManager _TotalBottle, _HealBottle;
     private Health _heroHealth;
-    public static event Action OnDrinkHealBottle;
 
     private void Awake()
     {
@@ -22,7 +20,7 @@ public class UseHealBottle : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.I) && _TotalBottle.TotalHealBottle > 0)
         {
-            OnDrinkHealBottle?.Invoke();
+            _HealBottle.Remove(1);
             CureHero();
         }
     }

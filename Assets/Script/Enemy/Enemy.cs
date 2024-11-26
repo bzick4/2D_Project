@@ -6,13 +6,14 @@ public class Enemy : MonoBehaviour
 {
     private Animator _enemyAnimation;
     private Health _health;
-
-    public static event Action OnGiveHealBottle; 
+    private HealBottleManager _healBottle;
+    
     
     private void Awake()
     {
         _enemyAnimation = GetComponentInChildren<Animator>();
         _health = GetComponent<Health>();
+        _healBottle = GetComponentInParent<HealBottleManager>();
     }
 
     private void OnEnable()
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour
         if (_health._currentHealth <=0)
         {
             _enemyAnimation.SetTrigger("Dead");
-            OnGiveHealBottle?.Invoke();
+            _healBottle.AddBonus(1);
             Destroy(gameObject, 1f);
         } 
     }
