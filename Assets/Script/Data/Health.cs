@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,13 @@ public class Health : MonoBehaviour
     
     public float _currentHealth{ get; set;}
     public static Action OnDamage;
-    
+
+    private void Update()
+    {
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _MaxHealth);
+        
+    }
+
     private  void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -26,6 +33,7 @@ public class Health : MonoBehaviour
         _currentHealth -= damage;
         UpdateHpBar();
         _animator?.SetTrigger("Hurt");
+        Invoke("StopAnimationHurt",0.8f);
         _damageParticle?.Play();
         OnDamage?.Invoke();
         ChekIsAlive();
@@ -34,6 +42,11 @@ public class Health : MonoBehaviour
     public void UpdateHpBar()
     {
         _ImageHP.fillAmount = _currentHealth / _MaxHealth; 
+    }
+    
+    private void StopAnimationHurt()
+    {
+        _animator?.SetTrigger("Idle");
     }
     
     private void ChekIsAlive()

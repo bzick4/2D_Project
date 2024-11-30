@@ -35,4 +35,5 @@ public class CoinScript : MonoBehaviour
     {
         _DestroyEffect.SetActive(true);
     }
+    
 }

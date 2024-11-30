@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;
     private Vector3 input;
 
+    
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -88,8 +89,12 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetTrigger("Dead");
             Invoke("LosePanele", 2f);
         }
+        else
+        {
+            _PanelLose.SetActive(false);
+        }
     }
-
+    
     private void LosePanele()
     {
         _PanelLose.SetActive(true);

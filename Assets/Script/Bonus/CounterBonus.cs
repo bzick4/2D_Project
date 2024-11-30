@@ -5,7 +5,7 @@ using UnityEngine;
 public class CounterBonus : MonoBehaviour, IBonus
 {
     [SerializeField] private TMP_Text _Coin;
-    private int _coins;
+    public int _coins { get; set; }
 
     public void AddBonus(int bonus)
     {
@@ -19,7 +19,7 @@ public class CounterBonus : MonoBehaviour, IBonus
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         _Coin.text = _coins.ToString();
     }

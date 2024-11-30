@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MoveTimeline : MonoBehaviour
 {
-    [SerializeField] Vector3 targetPosition;
+    [SerializeField] Transform targetPoint;
     [SerializeField] private float speed = 0.7f;
 
     private bool isMoving = false;
@@ -13,9 +13,9 @@ public class MoveTimeline : MonoBehaviour
         
         if (isMoving)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * -Time.deltaTime);
+            transform.position = Vector2.MoveTowards((Vector2)transform.position, (Vector2)targetPoint.position, speed * Time.deltaTime);
             
-            if (transform.position == targetPosition)
+            if (Vector2.Distance(transform.position, targetPoint.position) < 0.01f)
             {
                 isMoving = false;
             }

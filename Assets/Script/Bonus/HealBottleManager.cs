@@ -6,7 +6,7 @@ public class HealBottleManager : MonoBehaviour, IBonus
     [SerializeField] private TMP_Text _HealBottle;
 
     private int _healBottle;
-    public int TotalHealBottle { get; private set; }
+    public int TotalHealBottle { get;set; }
     
     public void AddBonus(int bonus)
     {
@@ -20,7 +20,7 @@ public class HealBottleManager : MonoBehaviour, IBonus
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         _HealBottle.text = TotalHealBottle.ToString();
     }

@@ -122,14 +122,12 @@ public class BattleManager : MonoBehaviour
     private void StopAnimation()
     {
         _heroAnimator?.SetBool("isAttack", false);
-        _enemyAnimator?.SetTrigger("Idle");
     }
 
     private IEnumerator StopAnimationEnemy(float deley)
     {
         yield return new WaitForSeconds(deley);
         _enemyAnimator?.SetTrigger("Idle");
-        _heroAnimator?.SetBool("isIdle",true);
     }
     
 }
