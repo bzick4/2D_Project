@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     
     private string _playerChoice, _enemyChoice;
     private bool isBattle = false;
+    private float _randomDamagebleHero;
     
     private void Awake()
     {
@@ -67,8 +68,8 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Игрок выбрал: " + _playerChoice);
 
         EnemyChoice();
-        
         DetermineWinner();
+        RandomDamagePlayer(_randomDamagebleHero);
     }
     
     private void EnemyChoice()
@@ -86,16 +87,36 @@ public class BattleManager : MonoBehaviour
         {
             _enemyChoice = "Paper";
         }
-        
         Debug.Log("Враг выбрал: " + _enemyChoice);
     }
     
-    
+    private void RandomDamagePlayer(float random)
+    {
+        random = Random.Range(0, 1001);
+        if (random >= 0 && random <= 333)
+        {
+            _randomDamagebleHero = 40;
+        }
+        else if(random >=334 && random <=666)
+        {
+            _randomDamagebleHero = 47;
+        }
+        else if (random >= 667 && random <= 999)
+        {
+            _randomDamagebleHero = 55;
+        }
+        else if(random==1000)
+        {
+            _randomDamagebleHero = 100;
+            {
+                Debug.Log($"CRITICAL DAMAGE{_randomDamagebleHero}");
+            }
+        } 
+    }
     
     private void DetermineWinner()
     {
-        float randomDamagebleEnemy = Random.Range(10, 41);
-        float randomDamagebleHero = Random.Range(38, 59);
+        float randomDamagebleEnemy = Random.Range(20, 44);
         
             if (_playerChoice == _enemyChoice)
             {
@@ -107,8 +128,8 @@ public class BattleManager : MonoBehaviour
             {
                 Debug.Log("Игрок победил!"); 
                 _heroAnimator?.SetBool("isAttack", true); 
-                _enemyHealth?.ApplyDamage(randomDamagebleHero); 
-                Debug.Log($"Герой нанес {randomDamagebleHero} урона");
+                _enemyHealth?.ApplyDamage(_randomDamagebleHero); 
+                Debug.Log($"Герой нанес {_randomDamagebleHero} урона");
                 Invoke("StopAnimation", 0.8f);
             }
             else

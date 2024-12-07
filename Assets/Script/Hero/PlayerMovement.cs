@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumped;
     private bool isGrounded = false;
     private Vector3 input;
-
     
     private void Awake()
     {
@@ -200,5 +199,29 @@ public class PlayerMovement : MonoBehaviour
         _animator.ResetTrigger("Dead");
         _animator.SetTrigger("Idle");
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Equals("Platform"))
+        {
+            this.transform.parent = collision.transform;
+        }
+
+        if (collision.gameObject.name.Equals("Spike (2)"))
+        {
+            this.transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Equals("Platform"))
+        {
+            this.transform.parent = null;
+        }
+        if (collision.gameObject.name.Equals("Spike (2)"))
+        {
+            this.transform.parent = null;
+        }
+    }
 }

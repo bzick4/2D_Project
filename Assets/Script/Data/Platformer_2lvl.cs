@@ -6,16 +6,18 @@ using UnityEngine;
 public class Platformer_2lvl : MonoBehaviour
 {
     [SerializeField] private float _Speed;
-
+    [Header("Range")] 
+    [SerializeField] private float _MaxY;
+    [SerializeField] private float _MinY;
     private bool isMoving = true;
 
     private void Update()
     {
-        if (transform.position.y > 2.2f)
+        if (transform.position.y > _MaxY)
         {
             isMoving = false;
         }
-        else if (transform.position.y <-1.3f)
+        else if (transform.position.y <-_MinY)
         {
             isMoving = true;
         }

@@ -10,6 +10,7 @@ TagManager:
   - Checkpoint
   - FxTemporaire
   - Coin
+  - DeadTrap
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - GroundCheck
   - Stone
   - Coin
-  - 
+  - Dead
   - 
   - 
   - 
