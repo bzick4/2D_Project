@@ -28833,4 +28833,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca9f994d23ad4579948d35c4b26fd77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CoinValue: 1
   _DestroyEffect: {fileID: 1296619719448342578}

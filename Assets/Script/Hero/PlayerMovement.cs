@@ -17,10 +17,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _JumpOffset;
 
     [Header("Panels")] 
-    [SerializeField] private GameObject _PanelLose;
-    
-    private Animator _animator;
+    public GameObject _PanelLose;
+
+    public Animator _animator { get; set; }
     private Health _health;
+
+    public bool isDead { get; set; }
     
     private Rigidbody2D _samuraiRb;
     private bool isMove;
@@ -84,14 +86,11 @@ public class PlayerMovement : MonoBehaviour
     
     private void Dead()
     {
-        if (_health._currentHealth <=0 )
+        if (_health._currentHealth <=0 && !isDead)
         {
+            isDead = true;
             _animator.SetTrigger("Dead");
             Invoke("LosePanele", 2f);
-        }
-        else
-        {
-            _PanelLose.SetActive(false);
         }
     }
     
@@ -194,6 +193,12 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("isSitdown", false);
         }
+    }
+
+    public void IdleAnim()
+    {
+        _animator.ResetTrigger("Dead");
+        _animator.SetTrigger("Idle");
     }
     
 }

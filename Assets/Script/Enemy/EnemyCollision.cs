@@ -7,7 +7,7 @@ public class EnemyCollision : MonoBehaviour
     private bool isActive = true;
     
 
-    void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Hero"))
         {

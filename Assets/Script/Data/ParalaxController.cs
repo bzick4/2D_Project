@@ -1,25 +1,29 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParalaxController : MonoBehaviour
 {
-    [SerializeField] private Transform[] _Layers;
-    [SerializeField] private float[] _Coeff;
+    [SerializeField] private Transform _Followingtarget;
+    [SerializeField, Range(0f, 1f)] private float _ParallaxStrenght = 0.1f;
+    private bool isDisablVerticalParallax=false;
+    private Vector3 _targetPreviousPosition;
 
-    private int LayersCount;
     private void Start()
     {
-        LayersCount = _Layers.Length;
+        if (!_Followingtarget)
+        {
+            _Followingtarget = Camera.main.transform;
+        }
+        _targetPreviousPosition = _Followingtarget.position;
     }
-
 
     private void Update()
     {
-        for (int i = 0; i < LayersCount; i++)
+        var delta = _Followingtarget.position - _targetPreviousPosition;
+        if (isDisablVerticalParallax)
         {
-            _Layers[i].position = transform.position * _Coeff[i];
+            delta.y = 0;
         }
+        _targetPreviousPosition = _Followingtarget.position;
+        transform.position += delta * _ParallaxStrenght;
     }
 }

@@ -90,6 +90,8 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Враг выбрал: " + _enemyChoice);
     }
     
+    
+    
     private void DetermineWinner()
     {
         float randomDamagebleEnemy = Random.Range(10, 41);

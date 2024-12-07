@@ -8,7 +8,8 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private Transform _HeroTransform; // Ссылка на объект игрока
     [SerializeField] private CounterBonus _Coins; // Количество монет
     [SerializeField] private HealBottleManager _HealthBottle; // Количество аптечек
-    [SerializeField] private List<Enemy> enemies; // Список врагов на сцене
+    [SerializeField] private PlayerMovement _Animator;
+    //[SerializeField] private List<Enemy> enemies; // Список врагов на сцене
 
     private string saveFilePath;
 
@@ -31,6 +32,7 @@ public class SaveManager : MonoBehaviour
             },
             Coins = _Coins._coins,
             HealthBottle = _HealthBottle.TotalHealBottle,
+            Animator = _Animator._animator
            // EnemyHealths = new List<int>() // Сохраняем здоровье всех врагов
         };
 
@@ -68,6 +70,10 @@ public class SaveManager : MonoBehaviour
         
         _HealthBottle.TotalHealBottle = data.HealthBottle;
         _HealthBottle.UpdateUI();
+
+        _Animator.isDead = false;
+        _Animator._PanelLose.SetActive(false);
+        _Animator.IdleAnim();
         
         Debug.Log($"coin {data.Coins}, bottle {data.HealthBottle}");
 
@@ -92,6 +98,7 @@ public class SaveData
     public float[] Position;
     public int Coins;
     public int HealthBottle;
+    public Animator Animator;
     //public List<int> EnemyHealths; // Здоровье врагов
 }
 
